@@ -84,7 +84,21 @@ client.playerMonitoring = new PlayerMonitoring(client);
 client.presenceMonitor = new PresenceMonitor(client);
 
 // Chargement des commandes
-const commandFiles = readdirSync(join(__dirname, 'commands')).filter(file => file.endsWith('.js'));
+let ignoredCommands = [];
+try {
+    const ignoreContent = readdirSync(join(__dirname, '.commandignore'), 'utf8');
+    ignoredCommands = ignoreContent
+        .toString()
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line && !line.startsWith('#'));
+} catch (error) {
+    // Pas de fichier .commandignore, c'est OK
+}
+
+const commandFiles = readdirSync(join(__dirname, 'commands'))
+    .filter(file => file.endsWith('.js') && !ignoredCommands.includes(file));
+
 for (const file of commandFiles) {
     try {
         const command = require(join(__dirname, 'commands', file));
