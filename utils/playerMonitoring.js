@@ -1,6 +1,7 @@
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
 const fs = require('fs').promises;
 const path = require('path');
+const { getChannels } = require('./constants');
 
 class PlayerMonitoring {
     constructor(client) {
@@ -282,11 +283,17 @@ class PlayerMonitoring {
             const guild = this.client.guilds.cache.first();
             if (!guild) return;
 
-            // Chercher le canal de logs
-            const logChannel = guild.channels.cache.find(c => 
-                c.name === 'logs-systeme' || c.name === 'monitoring-vendeurs'
-            );
-            if (!logChannel) return;
+            const channels = getChannels();
+            if (!channels.logs) {
+                console.log('⚠️ CHANNEL_LOGS non configuré, pas de logs Discord');
+                return;
+            }
+
+            const logChannel = guild.channels.cache.get(channels.logs);
+            if (!logChannel) {
+                console.log(`⚠️ Canal de logs ${channels.logs} non trouvé ou inaccessible`);
+                return;
+            }
 
             let embed;
             const timestamp = new Date().toLocaleString('fr-FR');

@@ -4,6 +4,7 @@ const { join } = require('path');
 const FiveMSync = require('./utils/fivemSync');
 const PlayerMonitoring = require('./utils/playerMonitoring');
 const PresenceMonitor = require('./utils/presenceMonitor');
+const { getChannels, getRoles } = require('./utils/constants');
 require('dotenv').config();
 
 const client = new Client({
