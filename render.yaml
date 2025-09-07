@@ -29,11 +29,11 @@ services:
       - key: CHANNEL_CATALOGUE
         value: "1413966843311423668"
       - key: CHANNEL_LOGS
-        value: 1413870104000860287
+        value: "1413870104000860287"
       - key: CHANNEL_STOCK
-        value: 1413869417518989444
+        value: "1413869417518989444"
       - key: CHANNEL_STATS_PRESENCE
-        value: 1413870102792896534
+        value: "1413870102792896534"
       - key: CHANNEL_LOGS_PRISE_SERVICE
         value: "1414008459300704256"
       - key: CHANNEL_LOGS_FIN_SERVICE
