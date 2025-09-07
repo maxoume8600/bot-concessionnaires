@@ -7,6 +7,32 @@ const PresenceMonitor = require('./utils/presenceMonitor');
 const { getChannels, getRoles } = require('./utils/constants');
 require('dotenv').config();
 
+// Validation des variables d'environnement requises
+function validateEnvironment() {
+    const requiredVars = {
+        DISCORD_TOKEN: process.env.DISCORD_TOKEN,
+        CLIENT_ID: process.env.CLIENT_ID,
+        GUILD_ID: process.env.GUILD_ID,
+        CHANNEL_LOGS: process.env.CHANNEL_LOGS,
+        CHANNEL_STATS_PRESENCE: process.env.CHANNEL_STATS_PRESENCE
+    };
+
+    const missingVars = [];
+    for (const [key, value] of Object.entries(requiredVars)) {
+        if (!value) {
+            missingVars.push(key);
+            console.error(`⚠️ Variable d'environnement manquante: ${key}`);
+        }
+    }
+
+    if (missingVars.length > 0) {
+        console.warn('❌ Configuration incomplète. Variables manquantes:', missingVars.join(', '));
+    }
+}
+
+// Valider l'environnement avant de démarrer
+validateEnvironment();
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,

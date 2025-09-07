@@ -17,7 +17,7 @@ services:
       - key: SERVER_NAME
         value: NEW LIFE RP
       - key: MONITORING_ENABLED
-        value: "true"
+        sync: false # Cette variable sera configurée via le dashboard Render
       - key: MONITORING_INTERVAL
         value: "30000"
       - key: INACTIVITY_THRESHOLD
