@@ -1,0 +1,17 @@
+{
+  "absences": [
+    {
+      "id": "ABS-1757238735581-BQ5T7",
+      "userId": "302550027006509056",
+      "userName": "Maxoume86",
+      "raison": "vacance",
+      "duree": "3 mois",
+      "details": "je par avec la famille",
+      "timestamp": 1757238735581,
+      "status": "approved",
+      "guildId": "1413097286610980978",
+      "approvedBy": "302550027006509056",
+      "approvedAt": 1757238773370
+    }
+  ]
+}

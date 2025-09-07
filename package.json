@@ -1,0 +1,26 @@
+{
+  "name": "bot-concessionnaire-fivem",
+  "version": "1.0.0",
+  "description": "Bot Discord pour gérer un concessionnaire sur serveur RP FiveM",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "check": "node check-config.js",
+    "deploy": "node deploy-commands.js",
+    "test-sync": "node test-sync.js",
+    "setup": "npm install && node check-config.js && node deploy-commands.js"
+  },
+  "keywords": ["discord", "bot", "fivem", "rp", "concessionnaire"],
+  "author": "Maxou",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

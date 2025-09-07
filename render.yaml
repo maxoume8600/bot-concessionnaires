@@ -1,0 +1,57 @@
+services:
+  - type: worker
+    name: bot-concessionnaire
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.16.0
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: CLIENT_ID
+        sync: false
+      - key: GUILD_ID
+        sync: false
+      - key: SERVER_NAME
+        value: NEW LIFE RP
+      - key: MONITORING_ENABLED
+        value: "true"
+      - key: MONITORING_INTERVAL
+        value: "30000"
+      - key: INACTIVITY_THRESHOLD
+        value: "300000"
+      - key: MIN_SHIFT_DURATION
+        value: "600000"
+      - key: DEALER_JOB_NAME
+        value: concessionnaire
+      - key: CHANNEL_CATALOGUE
+        value: "1413966843311423668"
+      - key: CHANNEL_LOGS
+        value: "1413870104000860287"
+      - key: CHANNEL_STOCK
+        value: "1413869417518989444"
+      - key: CHANNEL_STATS_PRESENCE
+        value: "1413870102792896534"
+      - key: CHANNEL_LOGS_PRISE_SERVICE
+        value: "1414008459300704256"
+      - key: CHANNEL_LOGS_FIN_SERVICE
+        value: "1414008539084751030"
+      - key: CHANNEL_LOGS_ABSENCES
+        value: "1414032645398073434"
+      - key: ROLE_VENDEUR
+        value: "1413869404495548456"
+      - key: ROLE_PATRON
+        value: "1413869403178795061"
+      - key: ROLE_CLIENT
+        value: "1413869405229547654"
+      - key: DEVISE
+        value: "€"
+      - key: TVA
+        value: "20"
+    autoDeploy: true
+    disk:
+      name: bot-data
+      mountPath: /app/data
+      sizeGB: 1

@@ -1,0 +1,40 @@
+{
+  "bot": {
+    "name": "Bot Concessionnaire",
+    "description": "Bot Discord pour gérer un concessionnaire sur serveur RP FiveM",
+    "version": "1.0.0",
+    "activity": "🚗 Gérer le concessionnaire"
+  },
+  "economie": {
+    "devise": "€",
+    "tva": 20,
+    "commission_vendeur": 5,
+    "remise_max": 50,
+    "stock_alerte": 3
+  },
+  "couleurs": {
+    "success": "#00FF00",
+    "error": "#FF0000",
+    "info": "#3498DB",
+    "warning": "#FFA500",
+    "primary": "#FFD700"
+  },
+  "messages": {
+    "vente_success": "Félicitations pour votre achat !",
+    "stock_faible": "⚠️ Stock faible",
+    "rupture_stock": "❌ Rupture de stock",
+    "vehicule_ajoute": "Véhicule ajouté avec succès au catalogue"
+  },
+  "vehicules": {
+    "categories": [
+      "Super",
+      "Sports", 
+      "SUV",
+      "Berline",
+      "Compacte",
+      "Moto",
+      "Utilitaire",
+      "Off-Road"
+    ]
+  }
+}
