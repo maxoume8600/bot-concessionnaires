@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const fs = require('fs').promises;
 const path = require('path');
+const { getDiscordId } = require('./envHelper');
 
 class PresenceMonitor {
     constructor(client) {
@@ -39,7 +40,10 @@ class PresenceMonitor {
     async initializeStatsMessage() {
         try {
             const channelId = process.env.CHANNEL_STATS_PRESENCE;
-            if (!channelId) return;
+            if (!channelId) {
+                console.log('⚠️ CHANNEL_STATS_PRESENCE non configuré dans les variables d\'environnement');
+                return;
+            }
 
             const channel = this.client.channels.cache.get(channelId);
             if (!channel) return;
