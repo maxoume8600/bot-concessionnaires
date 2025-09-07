@@ -5,6 +5,14 @@ const EmbedUtils = require('../utils/embeds');
 // Fonction utilitaire pour répondre de manière sécurisée aux interactions
 async function safeReply(interaction, options) {
     try {
+        // Ajouter le flag ephemeral aux options
+        if (typeof options === 'object' && !options.flags) {
+            options = {
+                ...options,
+                flags: 1 << 6  // Ephemeral flag
+            };
+        }
+
         if (interaction.deferred) {
             return await interaction.editReply(options);
         } else if (interaction.replied) {
@@ -17,6 +25,16 @@ async function safeReply(interaction, options) {
             console.log('⏰ Interaction expirée ou déjà traitée, ignorée');
             return null;
         }
+        if (error.code === 40060) {
+            console.log('⏰ Interaction expirée (40060), tentative de réponse différée...');
+            try {
+                await interaction.deferReply({ ephemeral: true });
+                return await interaction.editReply(options);
+            } catch (deferError) {
+                console.log('⚠️ Impossible de différer la réponse:', deferError.message);
+                return null;
+            }
+        }
         throw error;
     }
 }
@@ -24,11 +42,27 @@ async function safeReply(interaction, options) {
 // Fonction utilitaire pour mettre à jour de manière sécurisée
 async function safeUpdate(interaction, options) {
     try {
+        // Ajouter le flag ephemeral aux options si nécessaire
+        if (typeof options === 'object' && !options.flags) {
+            options = {
+                ...options,
+                flags: 1 << 6  // Ephemeral flag
+            };
+        }
+
         return await interaction.update(options);
     } catch (error) {
-        if (error.code === 10062) {
-            console.log('⏰ Interaction expirée ou déjà traitée, ignorée');
-            return null;
+        if (error.code === 10062 || error.code === 40060) {
+            console.log(`⏰ Interaction expirée (${error.code}), tentative de réponse alternative...`);
+            try {
+                return await interaction.reply({
+                    ...options,
+                    ephemeral: true
+                });
+            } catch (replyError) {
+                console.log('⚠️ Impossible de répondre:', replyError.message);
+                return null;
+            }
         }
         throw error;
     }

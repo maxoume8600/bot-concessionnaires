@@ -86,14 +86,14 @@ client.presenceMonitor = new PresenceMonitor(client);
 // Chargement des commandes
 let ignoredCommands = [];
 try {
-    const ignoreContent = readdirSync(join(__dirname, '.commandignore'), 'utf8');
+    const ignoreContent = require('fs').readFileSync(join(__dirname, '.commandignore'), 'utf8');
     ignoredCommands = ignoreContent
-        .toString()
         .split('\n')
         .map(line => line.trim())
         .filter(line => line && !line.startsWith('#'));
+    console.log('📋 Commandes ignorées:', ignoredCommands);
 } catch (error) {
-    // Pas de fichier .commandignore, c'est OK
+    console.log('ℹ️ Pas de fichier .commandignore trouvé');
 }
 
 const commandFiles = readdirSync(join(__dirname, 'commands'))
