@@ -48,6 +48,16 @@ client.commands = new Collection();
 client.vehicules = new Collection();
 client.clients = new Collection();
 
+// Ajout d'un petit serveur HTTP pour satisfaire Render
+const http = require('http');
+const server = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('Bot Discord en ligne !');
+});
+server.listen(process.env.PORT || 3000, () => {
+    console.log(`Serveur HTTP démarré sur le port ${process.env.PORT || 3000}`);
+});
+
 // Ajouter une méthode pour recharger les véhicules
 client.loadVehicules = function() {
     return new Promise((resolve, reject) => {

@@ -120,14 +120,8 @@ class PresenceMonitor {
             
             console.log('✅ Messages initialisés - Stats:', this.statsMessageId, 'Monitoring:', this.monitoringMessageId);
 
-            if (botMessage) {
-                this.statsMessageId = botMessage.id;
-            } else {
-                const newMessage = await channel.send({ 
-                    embeds: [this.createStatsEmbed()]
-                });
-                this.statsMessageId = newMessage.id;
-            }
+            // Les nouveaux messages sont déjà créés et les IDs sont stockés plus haut
+            // Pas besoin de cette partie du code car elle fait double emploi
         } catch (error) {
             console.error('❌ Erreur lors de l\'initialisation du message de stats:', error);
         }
